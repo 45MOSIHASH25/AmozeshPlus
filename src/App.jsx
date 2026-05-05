@@ -264,7 +264,7 @@ export default function App() {
       `}} />
 
       <nav className="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors h-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex items-center">
               <div className="bg-indigo-600 p-2 rounded-xl ml-3 shadow-md shadow-indigo-200 dark:shadow-none">
@@ -300,7 +300,7 @@ export default function App() {
           </div>
       )}
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="w-full overflow-x-hidden px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
         {activeRole === 'teacher' && (
           <div className="mb-8 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col lg:flex-row justify-between items-center gap-4 transition-colors">
             <div className="flex items-center gap-4 w-full md:w-auto">

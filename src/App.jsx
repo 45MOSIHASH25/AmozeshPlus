@@ -183,11 +183,11 @@ const EditableTitle = ({ titleKey, titles, setTitles, defaultTitle, isTeacher, c
   const handleSave = () => { setTitles({...titles, [titleKey]: value}); setIsEditing(false); };
   
   if (!isTeacher) return <span className={className}>{titles[titleKey] || defaultTitle}</span>;
-  if (isEditing) return <input autoFocus value={value} onChange={e => setValue(e.target.value)} onBlur={handleSave} onKeyDown={e => e.key === 'Enter' && handleSave()} className={`border-b-2 border-indigo-500 bg-transparent outline-none w-auto max-w-[120px] inline-block ${className}`} />;
+  if (isEditing) return <input autoFocus value={value} onChange={e => setValue(e.target.value)} onBlur={handleSave} onKeyDown={e => e.key === 'Enter' && handleSave()} className={`border-b-2 border-indigo-500 bg-transparent outline-none w-full max-w-[200px] inline-block ${className}`} />;
   
   return (
     <span className={`inline-flex items-center gap-1 group cursor-pointer ${className}`} onClick={() => setIsEditing(true)} title="کلیک برای ویرایش">
-      {titles[titleKey] || defaultTitle} <Edit3 className="w-3 h-3 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+      {titles[titleKey] || defaultTitle} <Edit3 className="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
     </span>
   );
 };
@@ -237,10 +237,10 @@ export default function App() {
   }, [records, students, currentWeekKey]);
 
   return (
-    <div dir="rtl" className={`min-h-screen font-sans transition-colors duration-300 ${theme === 'dark' ? 'dark bg-slate-900 text-slate-100' : 'bg-slate-100 text-slate-800'}`}>
+    <div dir="rtl" className={`min-h-screen w-full font-sans transition-colors duration-300 ${theme === 'dark' ? 'dark bg-slate-900 text-slate-100' : 'bg-slate-100 text-slate-800'}`}>
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
-        body { font-family: 'Vazirmatn', sans-serif; }
+        body { font-family: 'Vazirmatn', sans-serif; overflow-x: hidden; }
         .hide-scrollbar::-webkit-scrollbar { height: 8px; width: 8px; }
         .hide-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .hide-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -263,7 +263,7 @@ export default function App() {
         .live-dot { width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; display: inline-block; margin-left: 6px; animation: pulse-red 2s infinite; }
       `}} />
 
-      <nav className="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors h-16">
+      <nav className="bg-white dark:bg-slate-800 w-full shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors h-16">
         <div className="w-full px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex items-center">
@@ -289,7 +289,7 @@ export default function App() {
 
       {/* Live Banner for Both Roles - Sticky right under the navbar */}
       {liveWeeklyRankings.length > 0 && (
-          <div className="sticky top-16 z-40 bg-yellow-50 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200 py-2 px-4 shadow-md flex justify-center items-center text-xs sm:text-sm font-bold overflow-hidden border-b border-yellow-200 dark:border-yellow-700/50 backdrop-blur-md">
+          <div className="w-full sticky top-16 z-40 bg-yellow-50 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200 py-2 px-4 shadow-md flex justify-center items-center text-xs sm:text-sm font-bold overflow-hidden border-b border-yellow-200 dark:border-yellow-700/50 backdrop-blur-md">
               <span className="live-dot mr-2"></span>
               <span className="text-yellow-600 dark:text-yellow-400 ml-3 whitespace-nowrap"><Flame className="w-4 h-4 inline mb-1"/> نتایج زنده:</span>
               <div className="flex gap-4 overflow-x-auto hide-scrollbar">
@@ -302,26 +302,26 @@ export default function App() {
 
       <main className="w-full overflow-x-hidden px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
         {activeRole === 'teacher' && (
-          <div className="mb-8 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col lg:flex-row justify-between items-center gap-4 transition-colors">
-            <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="w-full mb-8 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col lg:flex-row justify-between items-center gap-4 transition-colors">
+            <div className="flex items-center gap-4 w-full lg:w-auto">
               <div className="p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl text-indigo-600 dark:text-indigo-400">
                 <Users className="w-6 h-6" />
               </div>
               <div className="flex-1">
                 <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">انتخاب دانش‌آموز:</label>
-                <select value={currentStudentId} onChange={(e) => setCurrentStudentId(e.target.value)} className="w-full md:w-64 border-slate-300 dark:border-slate-600 rounded-xl text-sm py-2 px-3 border outline-none bg-slate-50 dark:bg-slate-700 dark:text-white font-medium">
+                <select value={currentStudentId} onChange={(e) => setCurrentStudentId(e.target.value)} className="w-full lg:w-64 border-slate-300 dark:border-slate-600 rounded-xl text-sm py-2 px-3 border outline-none bg-slate-50 dark:bg-slate-700 dark:text-white font-medium">
                   {students.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
                 </select>
               </div>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto items-center">
-              <button onClick={() => setTeacherEditMode(!teacherEditMode)} className={`flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-bold transition-colors w-full sm:w-auto ${teacherEditMode ? 'bg-red-100 text-red-700 border-red-300 border dark:bg-red-900/50 dark:text-red-300 dark:border-red-800' : 'bg-slate-100 text-slate-600 border border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600'}`}>
+              <button onClick={() => setTeacherEditMode(!teacherEditMode)} className={`flex w-full sm:w-auto items-center justify-center px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${teacherEditMode ? 'bg-red-100 text-red-700 border-red-300 border dark:bg-red-900/50 dark:text-red-300 dark:border-red-800' : 'bg-slate-100 text-slate-600 border border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600'}`}>
                  {teacherEditMode ? <Unlock className="w-4 h-4 ml-2"/> : <Lock className="w-4 h-4 ml-2"/>}
                  {teacherEditMode ? 'ویرایش تقویم: فعال' : 'فعال‌سازی ویرایش تقویم'}
               </button>
               <form onSubmit={handleAddStudent} className="flex w-full sm:w-auto gap-2">
-                <input type="text" placeholder="دانش‌آموز جدید..." value={newStudentName} onChange={(e) => setNewStudentName(e.target.value)} className="flex-1 w-32 border-slate-300 dark:border-slate-600 rounded-xl text-sm py-2 px-3 border outline-none font-medium dark:bg-slate-700 dark:text-white"/>
+                <input type="text" placeholder="دانش‌آموز جدید..." value={newStudentName} onChange={(e) => setNewStudentName(e.target.value)} className="flex-1 sm:w-32 border-slate-300 dark:border-slate-600 rounded-xl text-sm py-2 px-3 border outline-none font-medium dark:bg-slate-700 dark:text-white"/>
                 <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors whitespace-nowrap"><Plus className="w-4 h-4"/></button>
               </form>
             </div>
@@ -375,11 +375,11 @@ function DashboardContent({ role, student, students, allRecords, setRecords, bas
   }, [role, teacherViewMode, basePlans, allRecords, student.id]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-4 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors">
-        <div>
-          <EditableTitle isTeacher={role === 'teacher'} titleKey="mainDashTitle" titles={titles} setTitles={setTitles} defaultTitle={role === 'student' ? 'داشبورد من' : `پرونده: ${student.name}`} className="text-3xl font-black text-slate-800 dark:text-white block" />
-          <EditableTitle isTeacher={role === 'teacher'} titleKey="mainDashSub" titles={titles} setTitles={setTitles} defaultTitle="مدیریت تقویم یکپارچه و ثبت عملکرد" className="text-slate-500 dark:text-slate-400 text-sm mt-2 font-medium block" />
+    <div className="w-full space-y-6">
+      <div className="w-full flex flex-col xl:flex-row justify-between items-start xl:items-end gap-4 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors">
+        <div className="w-full xl:w-auto">
+          <EditableTitle isTeacher={role === 'teacher'} titleKey="mainDashTitle" titles={titles} setTitles={setTitles} defaultTitle={role === 'student' ? 'داشبورد من' : `پرونده: ${student.name}`} className="text-3xl font-black text-slate-800 dark:text-white block w-full" />
+          <EditableTitle isTeacher={role === 'teacher'} titleKey="mainDashSub" titles={titles} setTitles={setTitles} defaultTitle="مدیریت تقویم یکپارچه و ثبت عملکرد" className="text-slate-500 dark:text-slate-400 text-sm mt-2 font-medium block w-full" />
         </div>
         
         <div className="flex flex-col gap-3 w-full xl:w-auto">
@@ -392,7 +392,7 @@ function DashboardContent({ role, student, students, allRecords, setRecords, bas
               )}
             </div>
             {role === 'teacher' && activeTab === 'calendar' && (
-               <div className="flex bg-slate-100 dark:bg-slate-700 p-1 rounded-xl">
+               <div className="flex bg-slate-100 dark:bg-slate-700 p-1 rounded-xl w-full">
                    <button onClick={() => setTeacherViewMode('base')} className={`flex-1 px-4 py-2 text-sm font-bold rounded-lg transition-all ${teacherViewMode === 'base' ? 'bg-white dark:bg-slate-800 text-purple-600 shadow-sm border border-slate-200 dark:border-slate-600' : 'text-slate-500 dark:text-slate-400'}`}>برنامه اولیه (پیشنهادی)</button>
                    <button onClick={() => setTeacherViewMode('actual')} className={`flex-1 px-4 py-2 text-sm font-bold rounded-lg transition-all ${teacherViewMode === 'actual' ? 'bg-white dark:bg-slate-800 text-indigo-600 shadow-sm border border-slate-200 dark:border-slate-600' : 'text-slate-500 dark:text-slate-400'}`}>تغییرات (عملکرد واقعی)</button>
                </div>
@@ -400,7 +400,7 @@ function DashboardContent({ role, student, students, allRecords, setRecords, bas
         </div>
       </div>
 
-      <div className="transition-all">
+      <div className="w-full transition-all">
         {activeTab === 'stats' && <StatsDashboard records={allRecords} basePlans={basePlans} titles={titles} setTitles={setTitles} role={role} studentId={student.id} />}
         {activeTab === 'calendar' && <CalendarVisualizations displayRecords={calendarRecords} allRecords={allRecords} setRecords={setRecords} basePlans={basePlans} setBasePlans={setBasePlans} submittedWeeks={submittedWeeks} setSubmittedWeeks={setSubmittedWeeks} studentId={student.id} allSubjects={allSubjects} tasks={tasks} setTasks={setTasks} feedbacks={feedbacks} setFeedbacks={setFeedbacks} role={role} teacherEditMode={teacherEditMode} teacherViewMode={teacherViewMode}/>}
         {activeTab === 'list' && <RecordsList displayRecords={calendarRecords} allRecords={allRecords} setRecords={setRecords} basePlans={basePlans} setBasePlans={setBasePlans} role={role} titles={titles} setTitles={setTitles} teacherEditMode={teacherEditMode} teacherViewMode={teacherViewMode} studentId={student.id} />}
@@ -431,7 +431,7 @@ function Leaderboard({ students, allRecords }) {
   }, [students, allRecords, period, today]);
 
   return (
-      <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
+      <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
           <div className="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 flex flex-col md:flex-row justify-between items-center gap-4">
               <h3 className="text-xl font-black text-slate-800 dark:text-white flex items-center">
                   <Trophy className="w-6 h-6 ml-2 text-amber-500" /> رتبه‌بندی رقابتی (ساعت مطالعه)
@@ -442,8 +442,8 @@ function Leaderboard({ students, allRecords }) {
                   <button onClick={() => setPeriod('month')} className={`px-4 py-1.5 text-sm font-bold rounded-lg transition-colors ${period === 'month' ? 'bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}>ماه</button>
               </div>
           </div>
-          <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-right">
+          <div className="w-full overflow-x-auto">
+              <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-right">
                   <thead className="bg-white dark:bg-slate-800">
                       <tr>
                           <th className="px-6 py-4 text-xs font-black text-slate-400 dark:text-slate-500 w-16 text-center">رتبه</th>
@@ -464,10 +464,10 @@ function Leaderboard({ students, allRecords }) {
                                   {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : <span className="text-sm">{index + 1}</span>}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-800 dark:text-slate-200">{student.name}</td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                  <div className="flex items-center gap-2">
-                                      <span className="text-base font-black text-indigo-600 dark:text-indigo-400 w-16">{student.score} ساعت</span>
-                                      <div className="w-32 bg-white dark:bg-slate-700 rounded-full h-2 border border-slate-200 dark:border-slate-600"><div className="bg-indigo-500 h-full rounded-full transition-all" style={{ width: `${percent}%` }} /></div>
+                              <td className="px-6 py-4 whitespace-nowrap w-full">
+                                  <div className="flex items-center gap-2 w-full">
+                                      <span className="text-base font-black text-indigo-600 dark:text-indigo-400 w-16 whitespace-nowrap">{student.score} ساعت</span>
+                                      <div className="w-full min-w-[100px] max-w-sm bg-white dark:bg-slate-700 rounded-full h-2 border border-slate-200 dark:border-slate-600"><div className="bg-indigo-500 h-full rounded-full transition-all" style={{ width: `${percent}%` }} /></div>
                                   </div>
                               </td>
                           </tr>
@@ -499,14 +499,14 @@ function FeedbackBox({ studentId, dateKey, role, feedbacks, setFeedbacks }) {
 
    if (role === 'student' && !existing) return null; 
    if (role === 'student') return (
-      <div className="mb-4 p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 flex items-start shadow-sm">
+      <div className="w-full mb-4 p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 flex items-start shadow-sm">
          <MessageSquare className="w-5 h-5 ml-3 flex-shrink-0 mt-0.5" />
          <div><span className="font-bold text-xs block mb-1">پیام مشاور شما در این دوره:</span><p className="text-sm font-medium leading-relaxed">{existing.text}</p></div>
       </div>
    );
 
    if (isEditing) return (
-      <div className="mb-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 shadow-inner">
+      <div className="w-full mb-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 shadow-inner">
          <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">ثبت بازخورد / پیام برای دانش‌آموز در این تاریخ:</label>
          <textarea rows={2} value={text} onChange={e=>setText(e.target.value)} className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 text-sm outline-none resize-none focus:border-indigo-500 mb-3" placeholder="توضیحات و بازخورد خود را بنویسید..." />
          <div className="flex gap-2">
@@ -517,7 +517,7 @@ function FeedbackBox({ studentId, dateKey, role, feedbacks, setFeedbacks }) {
    );
 
    return (
-      <div className={`mb-4 p-4 rounded-2xl border flex items-center justify-between cursor-pointer transition-colors shadow-sm ${existing ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-slate-50 dark:bg-slate-800 border-dashed border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'}`} onClick={() => setIsEditing(true)}>
+      <div className={`w-full mb-4 p-4 rounded-2xl border flex items-center justify-between cursor-pointer transition-colors shadow-sm ${existing ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800' : 'bg-slate-50 dark:bg-slate-800 border-dashed border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'}`} onClick={() => setIsEditing(true)}>
          <div className="flex items-center gap-3">
              <div className={`p-2 rounded-xl ${existing ? 'bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-400' : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400'}`}>
                 <MessageSquare className="w-5 h-5" />
@@ -551,7 +551,7 @@ function TaskSidebar({ studentId, tasks, setTasks, role }) {
     };
 
     return (
-       <div className="w-full lg:w-72 bg-slate-50 dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 p-5 flex flex-col h-[70vh]">
+       <div className="w-full lg:w-80 bg-slate-50 dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 p-5 flex flex-col lg:h-[70vh] min-h-[400px]">
            <h3 className="text-lg font-black text-slate-800 dark:text-white mb-4 flex items-center"><CheckCircle className="w-5 h-5 ml-2 text-indigo-500" /> تسک‌های تعیین شده توسط مشاور</h3>
            
            {role === 'teacher' && (
@@ -620,9 +620,9 @@ function StatsDashboard({ records, basePlans, titles, setTitles, role, studentId
   }, [records, basePlans, todayStr, today, studentId]);
 
   return (
-    <div className="space-y-8">
+    <div className="w-full space-y-8">
       {/* 3 Adherence Levels */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-3xl p-6 shadow-lg text-white flex flex-col justify-between relative overflow-hidden transition-transform hover:scale-[1.02]">
              <Target className="w-16 h-16 absolute -left-4 -bottom-4 opacity-10" />
              <div className="flex justify-between items-center mb-4"><span className="font-bold opacity-90">پایبندی امروز</span><Activity className="w-5 h-5 opacity-70"/></div>
@@ -640,13 +640,13 @@ function StatsDashboard({ records, basePlans, titles, setTitles, role, studentId
           </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard idKey="tdy" titleKey="statToday" defaultTitle="ساعات امروز" studyH={stats.studyD} sleepH={stats.sleepD} miscH={stats.miscD} icon={Sun} colorClass="bg-amber-500" role={role} titles={titles} setTitles={setTitles} />
         <StatCard idKey="wk" titleKey="statWeek" defaultTitle="ساعات هفته جاری" studyH={stats.studyW} sleepH={stats.sleepW} miscH={stats.miscW} icon={BarChart3} colorClass="bg-blue-500" role={role} titles={titles} setTitles={setTitles} />
         <StatCard idKey="mo" titleKey="statMonth" defaultTitle="ساعات ماه جاری" studyH={stats.studyM} sleepH={stats.sleepM} miscH={stats.miscM} icon={CalendarDays} colorClass="bg-emerald-500" role={role} titles={titles} setTitles={setTitles} />
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 transition-colors">
+      <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 transition-colors">
         <div className="flex items-center mb-8">
           <Activity className="w-6 h-6 ml-2 text-indigo-500" />
           <EditableTitle isTeacher={role === 'teacher'} titleKey="statSubjects" titles={titles} setTitles={setTitles} defaultTitle="تفکیک ساعات دروس (عملکرد واقعی کل)" className="text-xl font-black text-slate-800 dark:text-white" />
@@ -654,11 +654,11 @@ function StatsDashboard({ records, basePlans, titles, setTitles, role, studentId
         {Object.keys(stats.subjectHours).length === 0 ? (
           <p className="text-slate-500 dark:text-slate-400 text-center py-4">هنوز درسی مطالعه نشده است.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {Object.entries(stats.subjectHours).sort((a,b) => b[1] - a[1]).map(([subject, hours]) => {
               const style = getSubjectStyle({subject});
               return (
-                <div key={subject} className={`p-5 rounded-2xl border-2 transition-transform hover:-translate-y-1 bg-white dark:bg-slate-800 ${style.split(' ')[1]}`}>
+                <div key={subject} className={`w-full p-5 rounded-2xl border-2 transition-transform hover:-translate-y-1 bg-white dark:bg-slate-800 ${style.split(' ')[1]}`}>
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-base font-black text-slate-700 dark:text-slate-200">{subject}</span>
                     <span className={`text-sm font-bold px-3 py-1 rounded-lg ${style}`}>{hours} ساعت</span>
@@ -677,13 +677,13 @@ function StatsDashboard({ records, basePlans, titles, setTitles, role, studentId
 }
 
 const StatCard = ({ idKey, titleKey, defaultTitle, studyH, sleepH, miscH, icon: Icon, colorClass, role, titles, setTitles }) => (
-    <div className={`bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 relative overflow-hidden transition-colors`}>
+    <div className={`w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 relative overflow-hidden transition-colors`}>
       <div className={`absolute top-0 left-0 w-2 h-full ${colorClass}`}></div>
       <div className="flex justify-between items-start mb-4">
         <EditableTitle isTeacher={role === 'teacher'} titleKey={titleKey} titles={titles} setTitles={setTitles} defaultTitle={defaultTitle} className="font-black text-slate-700 dark:text-slate-200 text-lg" />
-        <div className={`p-3 rounded-2xl ${colorClass.replace('bg-', 'bg-opacity-20 text-').replace('-500', '-600')} dark:bg-opacity-30`}><Icon className="w-6 h-6" /></div>
+        <div className={`p-3 rounded-2xl flex-shrink-0 ${colorClass.replace('bg-', 'bg-opacity-20 text-').replace('-500', '-600')} dark:bg-opacity-30`}><Icon className="w-6 h-6" /></div>
       </div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="w-full grid grid-cols-3 gap-2">
         <div className="bg-indigo-50 dark:bg-indigo-900/30 p-3 rounded-2xl text-center flex flex-col justify-center items-center">
           <EditableTitle isTeacher={role === 'teacher'} titleKey={`lblStudy_${idKey}`} titles={titles} setTitles={setTitles} defaultTitle="مطالعه" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 mb-1 truncate" />
           <p className="text-xl font-black text-indigo-900 dark:text-indigo-200">{studyH} <span className="text-xs font-medium">h</span></p>
@@ -1007,14 +1007,14 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
     }
 
     return (
-      <div className="relative border-r border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 flex-none group select-none" style={{ minWidth: isCompact ? '200px' : '300px' }}>
+      <div className="relative border-r border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 flex-none group select-none w-full" style={{ minWidth: isCompact ? '200px' : '300px' }}>
         {showHeader && (
-          <div className="sticky top-0 bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur-sm p-3 border-b border-slate-200 dark:border-slate-700 z-40 text-center shadow-sm">
+          <div className="sticky top-0 bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur-sm p-3 border-b border-slate-200 dark:border-slate-700 z-40 text-center shadow-sm w-full">
              <div className="font-black text-slate-800 dark:text-slate-100 text-sm">{getWeekdayFromJalaali(dateObj.jy, dateObj.jm, dateObj.jd)}</div>
              <div className="text-xs text-slate-500 dark:text-slate-400 font-bold mt-1">{dateObj.jd} {SHAMSI_MONTHS[dateObj.jm - 1]}</div>
           </div>
         )}
-        <div ref={el => timelineRefs.current[dateStrKey] = el} className={`relative ${canEdit ? 'cursor-crosshair' : 'cursor-not-allowed opacity-90'}`} style={{ height: `${TOTAL_HEIGHT}px` }} onMouseDown={e => handleMouseDown(e, dateObj, isCompact)}>
+        <div ref={el => timelineRefs.current[dateStrKey] = el} className={`relative w-full ${canEdit ? 'cursor-crosshair' : 'cursor-not-allowed opacity-90'}`} style={{ height: `${TOTAL_HEIGHT}px` }} onMouseDown={e => handleMouseDown(e, dateObj, isCompact)}>
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-10 transition-opacity">
             {canEdit && <Plus className="w-16 h-16 text-indigo-500" />}
           </div>
@@ -1097,7 +1097,7 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
                   </div>
                 )}
 
-                <div className="font-black text-xs truncate w-full pointer-events-none">{rec.subject}</div>
+                <div className="font-black text-xs truncate w-full pointer-events-none px-1">{rec.subject}</div>
                 {previewHeight > 30 && <div className="text-[10px] font-bold opacity-90 pointer-events-none">{previewStartTime} ({previewDuration}h)</div>}
 
                 {canEdit && (
@@ -1117,8 +1117,8 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
   };
 
   return (
-    <div className="space-y-6 relative">
-      <div className="flex flex-col md:flex-row bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl w-full shadow-sm p-1.5 gap-2 transition-colors justify-between items-center">
+    <div className="w-full space-y-6 relative">
+      <div className="w-full flex flex-col md:flex-row bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl shadow-sm p-1.5 gap-2 transition-colors justify-between items-center">
         <div className="flex gap-1 overflow-x-auto w-full md:w-auto">
            <button onClick={() => setViewMode('weekly')} className={`px-4 py-2.5 text-sm font-black rounded-xl flex items-center transition-colors ${viewMode === 'weekly' ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'}`}><CalendarDays className="w-4 h-4 ml-1 md:ml-2"/> هفتگی</button>
            <button onClick={() => setViewMode('daily')} className={`px-4 py-2.5 text-sm font-black rounded-xl flex items-center transition-colors ${viewMode === 'daily' ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'}`}><AlignVerticalJustifyStart className="w-4 h-4 ml-1 md:ml-2"/> روزانه</button>
@@ -1128,11 +1128,11 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
 
       <FeedbackBox studentId={studentId} dateKey={currentDateKey} role={role} feedbacks={feedbacks} setFeedbacks={setFeedbacks} />
 
-      <div className="flex flex-col lg:flex-row gap-6">
-         <div className="flex-1 min-w-0">
+      <div className="w-full flex flex-col lg:flex-row gap-6">
+         <div className="w-full flex-1 min-w-0">
             {viewMode === 'daily' && (
-               <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-                <div className="bg-indigo-50 dark:bg-slate-700 p-4 border-b border-indigo-100 dark:border-slate-600 flex justify-between items-center">
+               <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
+                <div className="w-full bg-indigo-50 dark:bg-slate-700 p-4 border-b border-indigo-100 dark:border-slate-600 flex justify-between items-center">
                   <button onClick={() => shiftDays(-1)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm hover:bg-slate-50 dark:text-white"><ChevronRight className="w-5 h-5"/></button>
                   <div className="text-center">
                     <h3 className="text-xl font-black text-indigo-900 dark:text-indigo-300">{getWeekdayFromJalaali(selectedDate.jy, selectedDate.jm, selectedDate.jd)}</h3>
@@ -1140,14 +1140,14 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
                   </div>
                   <button onClick={() => shiftDays(1)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm hover:bg-slate-50 dark:text-white"><ChevronLeft className="w-5 h-5"/></button>
                 </div>
-                <div className="overflow-y-auto hide-scrollbar" style={{ height: '65vh' }} onScroll={() => setContextMenu(null)}>
+                <div className="w-full overflow-y-auto hide-scrollbar" style={{ height: '65vh' }} onScroll={() => setContextMenu(null)}>
                   <TimelineColumn dateObj={selectedDate} dayRecords={displayRecords.filter(r => r.dateString === `${selectedDate.jy}/${selectedDate.jm.toString().padStart(2,'0')}/${selectedDate.jd.toString().padStart(2,'0')}`)} showHeader={false} />
                 </div>
               </div>
             )}
             {viewMode === 'weekly' && (
-              <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors flex flex-col relative">
-                 <div className="bg-indigo-50 dark:bg-slate-700 p-4 border-b border-indigo-100 dark:border-slate-600 flex flex-col xl:flex-row justify-between items-center gap-4">
+              <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors flex flex-col relative">
+                 <div className="w-full bg-indigo-50 dark:bg-slate-700 p-4 border-b border-indigo-100 dark:border-slate-600 flex flex-col xl:flex-row justify-between items-center gap-4">
                   <div className="flex items-center gap-2">
                     <button onClick={() => shiftDays(-7)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm hover:bg-slate-50 dark:text-white flex items-center text-sm font-bold"><ChevronRight className="w-4 h-4 ml-1"/> هفته قبل</button>
                     <button onClick={() => shiftDays(7)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm hover:bg-slate-50 dark:text-white flex items-center text-sm font-bold">هفته بعد <ChevronLeft className="w-4 h-4 mr-1"/></button>
@@ -1180,7 +1180,7 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
                     </div>
                   )}
                 </div>
-                <div className="overflow-x-auto overflow-y-auto hide-scrollbar flex" style={{ height: '70vh', direction: 'rtl' }} onScroll={() => setContextMenu(null)}>
+                <div className="w-full overflow-x-auto overflow-y-auto hide-scrollbar flex" style={{ height: '70vh', direction: 'rtl' }} onScroll={() => setContextMenu(null)}>
                   {getJalaaliWeekDays(selectedDate.jy, selectedDate.jm, selectedDate.jd).map((dateObj, i) => (
                      <TimelineColumn key={i} dateObj={dateObj} dayRecords={displayRecords.filter(r => r.dateString === `${dateObj.jy}/${dateObj.jm.toString().padStart(2,'0')}/${dateObj.jd.toString().padStart(2,'0')}`)} isCompact={true} />
                   ))}
@@ -1188,13 +1188,13 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
               </div>
             )}
             {viewMode === 'monthly' && (
-              <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden p-6 transition-colors">
-                <div className="flex justify-between items-center mb-6 bg-slate-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600">
+              <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden p-6 transition-colors">
+                <div className="w-full flex justify-between items-center mb-6 bg-slate-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600">
                   <button onClick={() => shiftMonth(-1)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm dark:text-white"><ChevronRight className="w-5 h-5"/></button>
                   <div className="text-center text-xl font-black text-slate-800 dark:text-white">{SHAMSI_MONTHS[selectedDate.jm - 1]} {selectedDate.jy}</div>
                   <button onClick={() => shiftMonth(1)} className="p-2 bg-white dark:bg-slate-600 rounded-xl shadow-sm dark:text-white"><ChevronLeft className="w-5 h-5"/></button>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4">
+                <div className="w-full grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4">
                   {Array.from({ length: selectedDate.jm <= 6 ? 31 : (selectedDate.jm <= 11 ? 30 : 29) }, (_, i) => i + 1).map(day => {
                      const dateStr = `${selectedDate.jy}/${selectedDate.jm.toString().padStart(2,'0')}/${day.toString().padStart(2,'0')}`;
                      const dayRecords = displayRecords.filter(r => r.dateString === dateStr);
@@ -1202,7 +1202,7 @@ function CalendarVisualizations({ displayRecords, allRecords, setRecords, basePl
                      const sleepH = dayRecords.filter(r => r.subject === 'خواب').reduce((s, r) => s + r.duration, 0);
                      return (
                        <div key={day} onClick={() => { setSelectedDate({...selectedDate, jd: day}); setViewMode('daily'); }}
-                         className={`bg-white dark:bg-slate-700 rounded-2xl border-2 border-slate-100 dark:border-slate-600 p-4 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all relative group h-32`}
+                         className={`w-full bg-white dark:bg-slate-700 rounded-2xl border-2 border-slate-100 dark:border-slate-600 p-4 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all relative group h-32`}
                        >
                          <span className="text-2xl font-black text-slate-800 dark:text-white mb-2">{day}</span>
                          {studyH > 0 && <span className={`text-[10px] font-bold text-indigo-600 bg-indigo-50 dark:bg-opacity-20 px-2 py-1 rounded w-full text-center mb-1 truncate`}>{studyH} h مطالعه</span>}
@@ -1358,15 +1358,15 @@ function RecordsList({ displayRecords, allRecords, setRecords, basePlans, setBas
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-      <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 flex justify-between items-center">
+    <div className="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
+      <div className="w-full px-6 py-5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 flex justify-between items-center">
         <EditableTitle isTeacher={role === 'teacher'} titleKey="listTitle" titles={titles} setTitles={setTitles} defaultTitle="لیست رکوردها" className="text-lg font-black text-slate-800 dark:text-white" />
         <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
           {displayRecords.length} رکورد
         </span>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-right">
+      <div className="w-full overflow-x-auto">
+        <table className="w-full min-w-full divide-y divide-slate-200 dark:divide-slate-700 text-right">
           <thead className="bg-white dark:bg-slate-800">
             <tr>
               <th className="px-6 py-4 text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider"><EditableTitle isTeacher={role === 'teacher'} titleKey="colDate" titles={titles} setTitles={setTitles} defaultTitle="تاریخ" className="" /></th>
